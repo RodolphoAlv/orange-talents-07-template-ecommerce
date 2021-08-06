@@ -2,14 +2,12 @@ package com.ecommerce.rodolpho.controller.form;
 
 import com.ecommerce.rodolpho.model.Categoria;
 import com.ecommerce.rodolpho.repository.CategoriaRepository;
-import com.ecommerce.rodolpho.shared.IdExists;
 import com.ecommerce.rodolpho.shared.OptionalIdExists;
 import com.ecommerce.rodolpho.shared.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
-import java.util.Optional;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class NovaCategoriaForm {
@@ -28,9 +26,13 @@ public class NovaCategoriaForm {
 
     public Categoria toModel(CategoriaRepository categoriaRepository) {
 
-        return categoriaRepository
-                .findById(categoriaMaeId)
-                .map(categoria -> new Categoria(nome, categoria))
-                .orElseGet(() -> new Categoria(nome));
+        if(categoriaMaeId != null) {
+            return categoriaRepository
+                    .findById(categoriaMaeId)
+                    .map(categoria -> new Categoria(nome, categoria))
+                    .orElseGet(() -> new Categoria(nome));
+        }
+
+        return new Categoria(nome);
     }
 }
