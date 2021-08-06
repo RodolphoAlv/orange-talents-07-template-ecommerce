@@ -1,6 +1,8 @@
 package com.ecommerce.rodolpho.controller.form;
 
 import com.ecommerce.rodolpho.model.Categoria;
+import com.ecommerce.rodolpho.shared.IdExists;
+import com.ecommerce.rodolpho.shared.OptionalIdExists;
 import com.ecommerce.rodolpho.shared.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
@@ -16,6 +18,11 @@ public class NovaCategoriaForm {
     private String nome;
 
     @Positive
+    @OptionalIdExists(
+            domainClass = Categoria.class,
+            fieldName = "id",
+            message = "{categoria.nula.ou.valida}"
+    )
     private Long categoriaMaeId;
 
     public Long getCategoriaMaeId() {
