@@ -1,6 +1,7 @@
 package com.ecommerce.rodolpho.controller.form;
 
 import com.ecommerce.rodolpho.model.Categoria;
+import com.ecommerce.rodolpho.repository.CategoriaRepository;
 import com.ecommerce.rodolpho.shared.IdExists;
 import com.ecommerce.rodolpho.shared.OptionalIdExists;
 import com.ecommerce.rodolpho.shared.UniqueValue;
@@ -25,13 +26,11 @@ public class NovaCategoriaForm {
     )
     private Long categoriaMaeId;
 
-    public Long getCategoriaMaeId() {
-        return  this.categoriaMaeId;
-    }
+    public Categoria toModel(CategoriaRepository categoriaRepository) {
 
-    public Categoria toModel(Optional<Categoria> possivelCategoria) {
-
-        return possivelCategoria.map(categoria -> new Categoria(nome, categoria))
+        return categoriaRepository
+                .findById(categoriaMaeId)
+                .map(categoria -> new Categoria(nome, categoria))
                 .orElseGet(() -> new Categoria(nome));
     }
 }

@@ -27,13 +27,7 @@ public class CategoriaController {
     @PostMapping
     public ResponseEntity<?> cadastrar(@Valid @RequestBody NovaCategoriaForm dto) {
 
-        Optional<Categoria> possivelCategoriaMae = Optional.empty();
-
-        if(dto.getCategoriaMaeId() != null) {
-            possivelCategoriaMae = categoriaRepository.findById(dto.getCategoriaMaeId());
-        }
-
-        Categoria categoria = dto.toModel(possivelCategoriaMae);
+        Categoria categoria = dto.toModel(categoriaRepository);
         categoriaRepository.save(categoria);
 
         return ResponseEntity.ok(categoria);
