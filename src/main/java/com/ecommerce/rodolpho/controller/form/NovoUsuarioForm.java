@@ -2,6 +2,7 @@ package com.ecommerce.rodolpho.controller.form;
 
 import com.ecommerce.rodolpho.model.Usuario;
 import com.ecommerce.rodolpho.shared.SenhaLimpa;
+import com.ecommerce.rodolpho.shared.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import javax.validation.constraints.Email;
@@ -13,6 +14,11 @@ public class NovoUsuarioForm {
 
     @NotBlank(message = "{login.nulo}")
     @Email(message = "{login.email}")
+    @UniqueValue(
+            domainClass = Usuario.class,
+            fieldName = "login",
+            message = "{login.ja.cadastrado}"
+    )
     private String login;
 
     @NotBlank(message = "{senha.nula}")

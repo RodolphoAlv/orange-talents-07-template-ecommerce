@@ -17,7 +17,7 @@ public class Usuario {
     @Column(nullable = false)
     private LocalDateTime dataHora;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String login;
 
     @Column(nullable = false)
