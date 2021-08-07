@@ -25,7 +25,7 @@ public class UsuarioController {
 
         Usuario usuario = dto.toModel();
         usuarioRepository.save(usuario);
-
+        
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

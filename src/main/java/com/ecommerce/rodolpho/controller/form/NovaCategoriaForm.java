@@ -13,7 +13,11 @@ import javax.validation.constraints.Positive;
 public class NovaCategoriaForm {
 
     @NotBlank
-    @UniqueValue(domainClass = Categoria.class, fieldName = "nome")
+    @UniqueValue(
+            domainClass = Categoria.class,
+            fieldName = "nome",
+            message = "{categoria.ja.cadastrada}"
+    )
     private String nome;
 
     @Positive
