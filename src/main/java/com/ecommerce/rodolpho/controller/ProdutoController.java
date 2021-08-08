@@ -2,8 +2,10 @@ package com.ecommerce.rodolpho.controller;
 
 import com.ecommerce.rodolpho.config.security.AutenticacaoService;
 import com.ecommerce.rodolpho.controller.form.AddImagensForm;
+import com.ecommerce.rodolpho.controller.form.NovaOpiniaoForm;
 import com.ecommerce.rodolpho.controller.form.NovoProdutoForm;
 import com.ecommerce.rodolpho.model.Imagem;
+import com.ecommerce.rodolpho.model.Opiniao;
 import com.ecommerce.rodolpho.model.Produto;
 import com.ecommerce.rodolpho.model.Usuario;
 import com.ecommerce.rodolpho.repository.CategoriaRepository;
