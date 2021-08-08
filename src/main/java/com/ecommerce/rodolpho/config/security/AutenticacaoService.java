@@ -3,6 +3,7 @@ package com.ecommerce.rodolpho.config.security;
 import com.ecommerce.rodolpho.model.Usuario;
 import com.ecommerce.rodolpho.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +25,13 @@ public class AutenticacaoService implements UserDetailsService {
 		}
 		
 		throw new UsernameNotFoundException("Dados inválidos!");
+	}
+
+	public static Usuario getUsuarioLogado() {
+		return (Usuario) SecurityContextHolder
+				.getContext()
+				.getAuthentication()
+				.getPrincipal();
 	}
 
 }

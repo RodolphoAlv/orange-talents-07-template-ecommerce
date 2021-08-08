@@ -3,6 +3,7 @@ package com.ecommerce.rodolpho.controller.form;
 import com.ecommerce.rodolpho.model.Caracteristica;
 import com.ecommerce.rodolpho.model.Categoria;
 import com.ecommerce.rodolpho.model.Produto;
+import com.ecommerce.rodolpho.model.Usuario;
 import com.ecommerce.rodolpho.repository.CategoriaRepository;
 import com.ecommerce.rodolpho.shared.IdExists;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -37,10 +38,10 @@ public class NovoProdutoForm {
     )
     private Long categoriaId;
 
-    public Produto toModel(CategoriaRepository categoriaRepository) {
+    public Produto toModel(CategoriaRepository categoriaRepository, Usuario dono) {
 
         Categoria categoria = categoriaRepository.findById(categoriaId).get();
         Set<Caracteristica> caracteristicas = CaracteristicaForm.toModelList(this.caracteristicas);
-        return new Produto(nome, valor, quantidade, caracteristicas, descricao, categoria);
+        return new Produto(nome, valor, quantidade, caracteristicas, descricao, categoria, dono);
     }
 }

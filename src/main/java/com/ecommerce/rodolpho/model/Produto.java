@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,8 +32,15 @@ public class Produto {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Categoria categoria;
+    @ManyToOne
+    private Usuario dono;
     @Column(nullable = false)
     private LocalDateTime instante;
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<Imagem>imagens;
+
+    @Deprecated
+    public Produto() {}
 
     public Produto(
             String nome,
@@ -39,7 +48,8 @@ public class Produto {
             Integer quantidade,
             Set<Caracteristica> caracteristicas,
             String descricao,
-            Categoria categoria
+            Categoria categoria,
+            Usuario dono
     ) {
         this.nome = nome;
         this.valor = valor;
@@ -48,5 +58,20 @@ public class Produto {
         this.descricao = descricao;
         this.categoria = categoria;
         this.instante = LocalDateTime.now();
+        this.dono = dono;
+        this.imagens = new ArrayList<>();
     }
+
+    public Produto adicionarImagens(List<String> links) {
+        links.stream()
+                .map(link -> new Imagem(link, this))
+                .forEach(imagens::add);
+        return this;
+    }
+
+    public Boolean isDono(Usuario usuario) {
+        return this.dono.equals(usuario);
+    }
+
+
 }
