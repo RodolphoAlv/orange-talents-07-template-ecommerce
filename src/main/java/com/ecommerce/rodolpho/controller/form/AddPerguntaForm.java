@@ -1,6 +1,7 @@
 package com.ecommerce.rodolpho.controller.form;
 
 import com.ecommerce.rodolpho.model.Opiniao;
+import com.ecommerce.rodolpho.model.Pergunta;
 import com.ecommerce.rodolpho.model.Produto;
 import com.ecommerce.rodolpho.model.Usuario;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -8,17 +9,12 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import javax.validation.constraints.*;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class NovaOpiniaoForm {
-    @NotNull
-    @Min(1) @Max(5)
-    private Integer nota;
+public class AddPerguntaForm {
+
     @NotBlank
     private String titulo;
-    @NotBlank
-    @Size(max = 500)
-    private String descricao;
 
-    public Opiniao toModel(Produto produto, Usuario usuarioLogado) {
-        return new Opiniao(nota, titulo, descricao, usuarioLogado, produto);
+    public Pergunta toModel(Usuario usuarioLogado, Produto produto) {
+        return new Pergunta(titulo, usuarioLogado, produto);
     }
 }

@@ -3,34 +3,32 @@ package com.ecommerce.rodolpho.model;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import java.time.LocalDateTime;
 
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class Opiniao {
+public class Pergunta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Min(1) @Max(5)
-    @Column(nullable = false)
-    private Integer nota;
     @Column(nullable = false)
     private String titulo;
-    @Column(nullable = false, length = 500, columnDefinition = "TEXT")
-    private String descricao;
+    @Column(nullable = false)
+    private LocalDateTime instante;
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Usuario usuario;
+    private Usuario interessado;
     @ManyToOne
     @JoinColumn(nullable = false)
     private Produto produto;
 
-    public Opiniao(Integer nota, String titulo, String descricao, Usuario usuario, Produto produto) {
-        this.nota = nota;
+    @Deprecated
+    public Pergunta() {}
+
+    public Pergunta(String titulo, Usuario interessado, Produto produto) {
         this.titulo = titulo;
-        this.descricao = descricao;
-        this.usuario = usuario;
+        this.instante = LocalDateTime.now();
+        this.interessado = interessado;
         this.produto = produto;
     }
 }

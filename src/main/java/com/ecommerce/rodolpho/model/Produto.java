@@ -69,6 +69,10 @@ public class Produto {
         return this;
     }
 
+    public String getEmailDono() {
+        return dono.getUsername();
+    }
+
     public Boolean isDono(Usuario usuario) {
         return this.dono.equals(usuario);
     }
