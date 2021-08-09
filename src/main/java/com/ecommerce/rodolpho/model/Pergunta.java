@@ -1,5 +1,6 @@
 package com.ecommerce.rodolpho.model;
 
+import com.ecommerce.rodolpho.controller.dto.PerguntaDto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import javax.persistence.*;
@@ -30,5 +31,9 @@ public class Pergunta {
         this.instante = LocalDateTime.now();
         this.interessado = interessado;
         this.produto = produto;
+    }
+
+    public PerguntaDto toResponse() {
+        return new PerguntaDto(id, titulo, instante, interessado.getUsername(), produto.getId());
     }
 }

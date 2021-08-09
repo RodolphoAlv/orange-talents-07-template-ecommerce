@@ -26,4 +26,8 @@ public class Imagem {
         this.url = url;
         this.produto = produto;
     }
+
+    public String getUrl() {
+        return url;
+    }
 }

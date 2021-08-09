@@ -1,5 +1,6 @@
 package com.ecommerce.rodolpho.model;
 
+import com.ecommerce.rodolpho.controller.dto.DetalheProdutoDto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
@@ -69,6 +71,26 @@ public class Produto {
         return this;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public Set<Caracteristica> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
     public String getEmailDono() {
         return dono.getUsername();
     }
@@ -77,5 +99,7 @@ public class Produto {
         return this.dono.equals(usuario);
     }
 
-
+    public List<String> getLinks() {
+        return imagens.stream().map(Imagem::getUrl).collect(Collectors.toList());
+    }
 }
