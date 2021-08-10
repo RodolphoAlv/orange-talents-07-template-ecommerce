@@ -1,6 +1,5 @@
 package com.ecommerce.rodolpho.model;
 
-import com.ecommerce.rodolpho.controller.dto.DetalheProdutoDto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import javax.persistence.*;
@@ -101,5 +100,14 @@ public class Produto {
 
     public List<String> getLinks() {
         return imagens.stream().map(Imagem::getUrl).collect(Collectors.toList());
+    }
+
+    public Boolean ajustarQuantidade(Integer quantidade) {
+
+        if(this.quantidade >= quantidade) {
+            this.quantidade -= quantidade;
+            return true;
+        }
+        return false;
     }
 }
